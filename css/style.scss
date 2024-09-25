@@ -1,0 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+
+:root {
+    --h-height: 80px;
+    --f-height: 40px;
+    --font-size: 16px;
+    --bg-color: #fff;
+    --main-color: #DA9938;
+    --accent-color: #d9880e;
+    --green: #64A553;
+    --blue: #67A1E6;
+    --font-color: #000000;
+    --gray: #D9D9D9;
+    --main-font: 'Inter';
+    --transition: 250ms ease-in;
+    --radius: 2em;
+    --bs-primary-rgb: 218, 153, 56;
+
+    --bs-btn-active-bg: #D9D9D9;
+    --bs-btn-active-border-color: #D9D9D9;
+    --bs-border-radius: 2em;
+    --bs-border-color: #D9D9D9;
+
+    @media (max-width: 767px) {
+        --font-size: 14px;
+    }
+    @media (max-width: 575px) {
+        --font-size: 12px;
+        --f-height: 50px;
+    }
+}
+
+
+/* mixins */
+@mixin flex($dir: row, $x: center, $y: center, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $x;
+    align-items: $y;
+    flex-wrap: $wrap;
+}
+@mixin safariFix {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    isolation: isolate;
+    transform: translateZ(0);
+}
+@mixin list {
+    list-style: none;
+    padding-left: 0px;
+}
+
+
+h1, h2, h3, h4, h5, h6, p, label, span, a, button, form, fieldset, legend, select, input, textarea, button, div, blockquote, cite, figure, figcaption, table, ul, ol, dl, li, address {
+    line-height: 140%;
+    margin-bottom: 0px;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    transition: color var(--transition);
+    &:hover, &:focus, &:active {
+        color: inherit;
+        text-decoration: none;
+        outline: none;
+    }
+}
+
+h1 {
+    font-size: 1.375em;
+    font-weight: 800;
+    text-align: left;
+    margin-bottom: 0px;
+    line-height: 120%;
+    @media (max-width: 575px) {
+        font-size: 1em;
+    }
+}
+h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 0px;
+}
+h3 {
+    font-size: 1.375em;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0px;
+}
+h4 {
+    font-size: 1.125em;
+    color: var(--main-color);
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 0px;
+}
+
+.flex-1 {flex:1;}
+.box {
+    border: 1px solid var(--main-color);
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.form-control {
+    padding: .75em 1.75em;
+    &::placeholder {
+        color: var(--font-color);
+        opacity: .5;
+        font-style: italic;
+    }
+}
+button {
+    background: none;
+    border: none;
+    padding: unset;
+    display: block;
+    font-family: inherit;
+    color: inherit;
+    outline: none !important;
+}
+.btn {
+    @include flex(row, center, center, nowrap);
+    text-align: center;
+    transition: var(--transition);
+    width: fit-content;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: .875em;
+    padding: .75em 1.75em;
+    &-primary {
+        @extend .btn;
+        color: var(--bg-color);
+        background-color: var(--main-color);
+        transition-property: background-color;
+        &:hover, &:focus, &:active {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+    }
+    &-secondary {
+        @extend .btn;
+        color: var(--font-color);
+        background-color: var(--gray);
+        transition-property: color, background-color;
+        &:hover, &:focus, &:active {
+            background-color: var(--main-color);
+            color: var(--bg-color);
+        }
+    }
+    &-link {
+        display: block;
+        width: fit-content;
+        color: var(--font-color);
+        opacity: 0.7;
+        transition: opacity var(--transition);
+        border-bottom: 1px dashed currentColor;
+        text-decoration: none !important;
+        &:hover, &:focus {
+            opacity: 1;
+            color: var(--font-color);
+        }
+        &:active {
+            opacity: .85;
+            color: var(--font-color);
+        }
+    }
+    &-info {
+        color: var(--font-color);
+        opacity: 0.5;
+        transition: opacity var(--transition);
+        span {
+            border-bottom: 1px dashed currentColor;
+        }
+        &:hover, &:focus {
+            opacity: 1;
+        }
+        &:active {
+            opacity: .8;
+        }
+    }
+    &-album {
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        background-color: #F7F7F7;
+        color: #AFAFAF;
+        @include flex();
+        transition: var(--transition);
+        transition-property: background-color, color, border-color;
+    }
+    &-elect {
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        background-color: #F7F7F7;
+        color: #AFAFAF;
+        @include flex();
+        transition: var(--transition);
+        transition-property: background-color, color, border-color;
+    }
+    &:disabled, &.disabled {
+        pointer-events: none;
+        background-color: #F0F0F0 !important;
+        color: #7D7D7D !important;
+    }
+}
+.btn-check:checked + .btn-album {
+    background-color: var(--blue);
+    color: var(--bg-color);
+    border-color: #F7F7F7;
+}
+.btn-check:checked + .btn-elect {
+    background-color: var(--green);
+    color: var(--bg-color);
+    border-color: #F7F7F7;
+}
+
+.fs {
+    &-09 {font-size: 0.875em;}
+    &-10 {font-size: 1em;}
+    &-11 {font-size: 1.1em;}
+    &-115 {font-size: 1.15em;}
+    &-12 {font-size: 1.2em;}
+    &-13 {font-size: 1.3em;}
+    &-14 {font-size: 1.4em;}
+    &-15 {font-size: 1.5em;}
+    &-16 {font-size: 1.6em;}
+    &-17 {font-size: 1.7em;}
+    &-18 {font-size: 1.8em;}
+    &-19 {font-size: 1.9em;}
+    &-20 {font-size: 2em;}
+}
+
+.w-xs-100 {
+    @media (max-width: 575px) {
+        width: 100%;
+    }
+}
+
+
+@media (min-width: 1520px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1440px;
+    }
+}
+@media (min-width: 1199px) {
+    .modal-lg {
+        --bs-modal-width: 940px;
+    }
+}
+
+
+body {
+    background-color: var(--bg-color);
+    font-size: var(--font-size);
+    font-family: var(--main-font);
+}
+
+header {
+    height: var(--h-height);
+    background-color: var(--bg-color);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+    .container {
+        height: 100%;
+        @include flex(row, space-between, center, nowrap);
+        .logo {
+            height: 60px;
+            margin-right: 2em;
+        }
+        .text {
+            flex: 1;
+            margin-right: 1em;
+        }
+        .infoGroup {
+            @include flex();
+            margin-right: 2em;
+            position: relative;
+            opacity: 1;
+            transition: opacity var(--transition);
+            @media (max-width: 767px) {
+                margin-right: 1em;
+            }
+            p {
+                font-size: .75em;
+                line-height: 100%;
+                margin-right: .4em;
+                @media (max-width: 1199px) {
+                    display: none;
+                }
+            }
+            img {
+                width: 3em;
+                @media (max-width: 767px) {
+                    width: 2em;
+                }
+            }
+            .count {
+                position: absolute;
+                top: -1.25em;
+                right: -1.5em;
+                font-size: 10px;
+                line-height: 100%;
+                font-weight: bold;
+                color: var(--bg-color);
+                width: 3em;
+                height: 3em;
+                border-radius: 50%;
+                @include flex();
+                outline: 4px solid #F7F7F7;
+                opacity: 1;
+                transition: opacity var(--transition);
+                @media (max-width: 767px) {
+                    top: -1.5em;
+                    right: -1.2em;
+                    width: 2.4em;
+                    height: 2.4em;
+                    outline: 3px solid #F7F7F7;
+                }
+                &.blue {
+                    background-color: var(--blue);
+                }
+                &.green {
+                    background-color: var(--green);
+                }
+            }
+            &.empty {
+                opacity: .3;
+                .count {
+                    opacity: 0;
+                }
+            }
+        }
+        .orderGroup {
+            @include flex(row, space-between, stretch, nowrap);
+            border: 3px solid var(--main-color);
+            border-radius: var(--radius);
+            width: 330px;
+            @media (max-width: 1199px) {
+                width: 280px;
+            }
+            @media (max-width: 991px) {
+                width: fit-content;
+                border: none;
+                font-size: .8em;
+            }
+            &-left {
+                @include flex(column, center, flex-start, nowrap);
+                flex: 1;
+                padding: 0em 1em 0em 2em;
+                @media (max-width: 991px) {
+                    display: none;
+                }
+            }
+            &-text {
+                font-size: 0.56em;
+                opacity: .5;
+                line-height: 120%;
+            }
+            &-price {
+                font-size: 1.25em;
+                font-weight: 700;
+                line-height: 120%;
+            }
+        }
+    }
+}
+
+main {
+    min-height: calc(100vh - var(--h-height) - var(--f-height));
+    padding-top: .85em;
+    padding-bottom: 1em;
+}
+
+.img-enter {
+    width: 70%;
+    object-fit: cover;
+    display: block;
+    margin: 1em auto 1.5em;
+}
+
+.topControls {
+    @include flex(row, space-between, center, nowrap);
+    &-view {
+        @include flex();
+    }
+    &-viewToggle {
+        @include flex();
+        gap: 10px;
+        border: 1px solid var(--gray);
+        padding: 2px;
+        border-radius: var(--radius);
+        @media (max-width: 575px) {
+            gap: 5px;
+        }
+        .btn {
+            opacity: .6;
+            padding: .45em 1.3em;
+            font-size: .9em;
+            line-height: 110%;
+            @media (max-width:1399px) {
+                max-width: 250px;
+            }
+            @media (max-width: 575px) {
+                padding: .45em .8em;
+            }
+            img {
+                width: 1.25em;
+            }
+        }
+    }
+    &-chooseAll {
+        @include flex();
+        &-btn {
+            @include flex();
+            cursor: pointer;
+            color: currentColor;
+            transition: color var(--transition);
+            &::before {
+                content: "Выбрать все фото";
+                color: currentColor;
+            }
+            svg {
+                opacity: 0.5;
+                color: currentColor;
+                transition: opacity var(--transition);
+            }
+            @media (max-width: 991px) {
+                &::before {
+                    content: unset !important;
+                }
+            }
+        }
+        
+    }
+}
+.btn-check:checked + .topControls-chooseAll-btn {
+    color: var(--green);
+    &::before {
+        content: "Отменить выбор всех фото";
+    }
+    svg {
+        opacity: 1;
+    }
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    opacity: 1;
+}
+
+.photosGrid {
+    --grid-height: 200px;
+    margin-top: 1.5em;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: var(--grid-height);
+    grid-auto-rows: var(--grid-height);
+    grid-auto-flow: dense;
+    gap: 1.2em 1.5em;
+    @media (max-width: 1399px) {
+        gap: 1em 1.25em;
+        --grid-height: 180px;
+    }
+    @media (max-width: 1199px) {
+        gap: 1em 1em;
+        --grid-height: 150px;
+    }
+    @media (max-width: 991px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 767px) {
+        gap: .75em;
+        --grid-height: 110px;
+    }
+    @media (max-width: 575px) {
+        grid-template-columns: repeat(2, 1fr);
+        --grid-height: 28vw;
+    }
+    .photo {
+        grid-column: span 1;
+        grid-row: span 1;
+        position: relative;
+        &.vertical {
+            grid-row: span 2;
+        }
+        img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        &-btns {
+            position: absolute;
+            bottom: 0.4em;
+            right: 0.4em;
+            @include flex(column, flex-end, center, nowrap);
+            gap: 2px;
+        }
+    }
+}
+
+
+.modal {
+    --bs-modal-border-radius: 1.5rem;
+    &-content {
+        position: relative;
+        overflow: hidden;
+        .btn-close {
+            position: absolute;
+            z-index: 10;
+            top: .5em;
+            right: .5em;
+            background: none;
+            @include flex();
+            padding: 0px;
+            width: 4em;
+            height: 4em;
+            @media (max-width: 575px) {
+                width: 2em;
+                height: 2em;
+            }
+        }
+    }
+    &-body {
+        position: relative;
+        z-index: 1;
+        padding: 4em 12%;
+        @media (max-width: 991px) {
+            padding: 2em;
+        }
+        @media (max-width: 575px) {
+            padding: 1.5em;
+        }
+    }
+    &-footer {
+        background-color: var(--gray);
+        padding: 1.5em 15%;
+        @media (max-width: 991px) {
+            padding: 1em;
+        }
+    }
+}
+.icon-7 {
+    width: 70px;
+    @media (max-width: 991px) {
+        width: 50px;
+    }
+}
+
+
+footer {
+    height: var(--f-height);
+    background-color: var(--gray);
+    .container {
+        height: 100%;
+    }
+}
+.contacts {
+    @include list();
+    height: 100%;
+    width: 100%;
+    @include flex(row, center, center, wrap);
+    align-content: center;
+    font-size: 0.75em;
+    li {
+        padding: 0em .35em;
+        line-height: 120%;
+        &:not(:first-child){
+            border-left: 1px solid currentColor;
+        }
+    }
+}
